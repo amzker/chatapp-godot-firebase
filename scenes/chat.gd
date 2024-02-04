@@ -18,6 +18,7 @@ func _ready():
 	
 func update_userdata():
 	data = await FirebaseLite.Authentication.getUserData()
+	#print(data)
 	email = data[1]["users"][0]["email"]
 	UID = data[1]["users"][0]["localId"]
 	$profile/email.text =  email
@@ -31,6 +32,7 @@ func update_userdata():
 
 func get_chatrooms():
 	var rooms = await FirebaseLite.RealtimeDatabase.read("/chatrooms/users")
+	#print(rooms)
 	$chatrooms.clear()
 	
 	for i in rooms[1].keys():
@@ -61,6 +63,7 @@ func _on_send_pressed():
 
 func chatmanager(req):
 	var chats = req["data"]
+	print(chats)
 	# because at first it gets all data
 	# laterwards only changes , thats why
 	var timestamps = chats.keys()
